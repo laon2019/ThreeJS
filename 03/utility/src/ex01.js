@@ -22,22 +22,34 @@ export default function example() {
 		0.1,
 		1000
 	);
-	camera.position.z = 5;
+	camera.position.x = 1;
+	camera.position.y = 3;
+	camera.position.z = 0;
+	
 	scene.add(camera);
+	
+	const ambientLight = new THREE.AmbientLight('white', 0.5);
+	const directionallight = new THREE.DirectionalLight('white', 1);
+	directionallight.position.x = 1;
+	directionallight.position.z = 2;
+	scene.add(directionallight, ambientLight);
 
-	const light = new THREE.DirectionalLight(0xffffff, 1);
-	light.position.x = 1;
-	light.position.z = 2;
-	scene.add(light);
+	//GridHelper
+	const gridHelper = new THREE.GridHelper(5);
+	scene.add(gridHelper);
 
+	// AxesHelper
+	const axesHelper = new THREE.AxesHelper(3);
+	scene.add(axesHelper);
 	// Mesh
 	const geometry = new THREE.BoxGeometry(1, 1, 1);
 	const material = new THREE.MeshStandardMaterial({
 		color: 'seagreen'
 	});
 	const mesh = new THREE.Mesh(geometry, material);
+	mesh.position.x = 2;
 	scene.add(mesh);
-
+	camera.lookAt(mesh.position);
 	// 그리기
 	const clock = new THREE.Clock();
 
